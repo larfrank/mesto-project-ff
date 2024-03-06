@@ -1,6 +1,6 @@
 import { initialCards } from './cards.js'
 import './pages/index.css';
-import { handle } from './handle.js'
+import { handle } from './modal.js'
 
 const cardContainer = document.querySelector('.places__list');
 
@@ -10,7 +10,6 @@ function createCard(cardData, deleteFunction) {
 
   cardElement.querySelector('.card__image').src = cardData.link;
   cardElement.querySelector('.card__title').textContent = cardData.name;
-
   cardElement.querySelector('.card__delete-button').addEventListener('click', deleteFunction);
 
   return cardElement;
@@ -23,7 +22,7 @@ const deleteCallback = (event) => {
 initialCards.forEach((elem) => {
   const card = createCard(elem, deleteCallback);
   cardContainer.append(card);
-})
+});
 
 const profileContainer = document.querySelector('.profile');
 const imageContainer = document.querySelector('.places');
