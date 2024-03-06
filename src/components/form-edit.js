@@ -7,7 +7,7 @@ const formElementEdit = document.forms['edit-profile'];
 const inputName = formElementEdit.elements.name;
 const inputDesc = formElementEdit.elements.description;
 
-export function profileFormInit() {
+export function initProfileForm() {
   inputName.value = profileTitle.textContent;
   inputDesc.value = profileDesc.textContent;
 };
@@ -21,7 +21,7 @@ function handleFormSubmit(evt) {
   closeEditFn(formElementEdit.closest('.popup_type_edit'));
 };
 
-export function formEditSubmitInit(closeCallback) {
+export function initSubmitEditForm(closeCallback) {
   closeEditFn = closeCallback;
   formElementEdit.addEventListener('submit', handleFormSubmit);
 };

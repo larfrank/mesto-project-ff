@@ -21,11 +21,10 @@ function handleFormSubmit(evt) {
 
   closeAddFn(formElementAdd.closest('.popup_type_new-card'));
 
-  inputPlaceName.value = '';
-  inputLink.value = '';
+  evt.target.reset();
 };
 
-export function formAddSubmitInit(closeCallback) {
+export function initSubmitAddForm(closeCallback) {
   closeAddFn = closeCallback;
   formElementAdd.addEventListener('submit', handleFormSubmit);
 };
