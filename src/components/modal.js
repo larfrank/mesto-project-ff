@@ -1,6 +1,3 @@
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__caption');
-
 export function openModal(popup) {
   popup.classList.add('popup_is-animated', 'popup_is-opened');
   popup.addEventListener('mousedown', mouseCallback);
@@ -24,12 +21,4 @@ function keyCallback (evt) {
     const openedPopup = document.querySelector('.popup_is-opened');
     closeModal(openedPopup);
   }
-};
-
-export const openImgCallback = (evt) => {
-  const cardDesc = evt.target.closest('.places__item').querySelector('.card__title').textContent;
-
-  popupImage.src = evt.target.src; 
-  popupCaption.textContent = cardDesc;
-  popupImage.alt = cardDesc;
 };

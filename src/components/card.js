@@ -1,18 +1,12 @@
-import { openImgCallback } from './modal.js'
-
-const deleteCallback = (evt) => {
+export const deleteCallback = (evt) => {
   evt.target.closest('.places__item').remove();
 };
 
-const likeCallback = (evt) => {
+export const likeCallback = (evt) => {
   evt.target.classList.toggle('card__like-button_is-active');
 };
 
-export function createCard(
-  cardData,
-  deleteFunction = deleteCallback,
-  likeFunction = likeCallback,
-  openImgFunction = openImgCallback) {
+export function createCard(cardData, deleteFunction, likeFunction, openImgFunction) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
 

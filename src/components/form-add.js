@@ -1,8 +1,8 @@
-import { createCard } from './card.js'
+import { createCard, likeCallback, deleteCallback} from './card.js'
 
 const cardContainer = document.querySelector('.places__list');
 
-let closeAddFn;
+let closeAddFn, openImgFn;
 
 const formElementAdd = document.forms['new-place'];
 const inputPlaceName = formElementAdd.elements['place-name'];
@@ -16,7 +16,7 @@ function handleFormSubmit(evt) {
     link: inputLink.value
   }
     
-  const newCard = createCard(cardData);
+  const newCard = createCard(cardData, deleteCallback, likeCallback, openImgFn);
   cardContainer.prepend(newCard);
 
   closeAddFn(formElementAdd.closest('.popup_type_new-card'));
@@ -24,7 +24,8 @@ function handleFormSubmit(evt) {
   evt.target.reset();
 };
 
-export function initSubmitAddForm(closeCallback) {
+export function initSubmitAddForm(closeCallback, openImgCallback) {
   closeAddFn = closeCallback;
+  openImgFn = openImgCallback;
   formElementAdd.addEventListener('submit', handleFormSubmit);
 };
