@@ -28,4 +28,4 @@ export function initSubmitAddForm(closeCallback, openImgCallback) {
   closeAddFn = closeCallback;
   openImgFn = openImgCallback;
   formElementAdd.addEventListener('submit', handleFormSubmit);
-};
+}
