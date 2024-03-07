@@ -25,8 +25,6 @@ function openImgCallback(evt) {
   popupImage.src = evt.target.src; 
   popupCaption.textContent = cardDesc;
   popupImage.alt = cardDesc;
-
-  console.log('lll');
 };
 
 initSubmitAddForm(closeModal, openImgCallback);
