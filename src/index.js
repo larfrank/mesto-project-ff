@@ -85,8 +85,6 @@ Promise.all([userInfo, initialCard])
   })
   .catch((err) => {
     console.log(err); 
-  });  
-
-addLike();
+  }); 
 
 enableValidation(validationConfig);

@@ -54,3 +54,20 @@ export const addLike = (cardId) => {
     headers: config.headers
   })
 }
+
+export const deleteLike = (cardId) => {
+  return fetch((`${config.baseUrl}/cards/likes/${cardId}`), {
+    method: 'DELETE',
+    headers: config.headers
+  })
+}
+
+export const changePhoto = (avatarsLink) => {
+  return fetch((`${config.baseUrl}/users/me/avatar`), {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: avatarsLink
+    })
+  })
+}
