@@ -71,3 +71,4 @@ export const changePhoto = (avatarsLink) => {
     })
   })
 }
+
