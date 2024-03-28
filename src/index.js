@@ -3,8 +3,9 @@ import { openModal, closeModal } from './components/modal.js'
 import { initProfileForm, initSubmitEditForm } from './components/form-edit.js'
 import { initAddForm, initSubmitAddForm } from './components/form-add.js'
 import { enableValidation } from './components/validation.js';
-import { getUserInfo, getInitialCards, changeInfo, getNewCard, getLikesCount, addLike } from './components/api.js';
+import { getUserInfo, getInitialCards } from './components/api.js';
 import { createCard, likeCallback, deleteCallback } from './components/card.js'
+import { initChangeAvatarForm, initSubmitChangeAvatarForm } from './components/form-change-avatar.js';
 
 const profileContainer = document.querySelector('.profile');
 const imageContainer = document.querySelector('.places');
@@ -14,6 +15,7 @@ const profileImg = document.querySelector('.profile__image');
 const cardContainer = document.querySelector('.places__list');
 const popupEdit = document.querySelector('.popup_type_edit'); 
 const popupAdd = document.querySelector('.popup_type_new-card');
+const popupAvatar = document.querySelector('.popup_type_new-avatar');
 const popupImg = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
@@ -35,8 +37,18 @@ function openImgCallback(evt) {
   popupImage.alt = cardDesc;
 };
 
-initSubmitAddForm(closeModal, openImgCallback, validationConfig);
-initSubmitEditForm(closeModal, validationConfig);
+function renderLoading(popupLoading, isLoading) {
+  if (isLoading) {
+    popupLoading.classList.add('popup__loading_visible');
+  }
+  else {
+    popupLoading.classList.remove('popup__loading_visible');
+  }
+}
+
+initSubmitAddForm(closeModal, openImgCallback, renderLoading, validationConfig);
+initSubmitEditForm(closeModal, renderLoading, validationConfig);
+initSubmitChangeAvatarForm(closeModal, renderLoading, validationConfig)
 
 profileContainer.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('profile__edit-button')) {
@@ -46,6 +58,10 @@ profileContainer.addEventListener('click', (evt) => {
   else if (evt.target.classList.contains('profile__add-button')) {
     initAddForm();
     openModal(popupAdd); 
+  }
+  else if (evt.target.classList.contains('profile__image')) {
+    initChangeAvatarForm();
+    openModal(popupAvatar);
   }
 });
 

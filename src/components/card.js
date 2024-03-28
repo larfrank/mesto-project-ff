@@ -10,11 +10,12 @@ export const deleteCallback = (evt) => {
     })
     .then((res) => {
       console.log(res);
-      evt.target.closest('.places__item').remove();
     })
     .catch((err) => {
       console.log(err); 
     })
+  
+  evt.target.closest('.places__item').remove();
 };
 
 export const likeCallback = (evt) => {
