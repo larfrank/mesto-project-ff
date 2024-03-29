@@ -20,28 +20,21 @@ export function initProfileForm() {
 function handleFormSubmit(evt) {
   evt.preventDefault();
 
-  renderLoadFn(evt.submitter, true);
+  renderLoadFn(evt.target.querySelector('.popup__loading'), true);
 
   changeInfo(profileTitle.textContent, profileDesc.textContent)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
     .then((res) => {
       console.log(res);
       profileTitle.textContent = inputName.value;
       profileDesc.textContent = inputDesc.value;
+      closeEditFn(formElementEdit.closest('.popup_type_edit'));
     })
-    .catch((err) => {т
+    .catch((err) => {
       console.log(err); 
     })
     .finally(() => {
       renderLoadFn(evt.target.querySelector('.popup__loading'), false)
     })
-  
-  closeEditFn(formElementEdit.closest('.popup_type_edit'));
 };
 
 export function initSubmitEditForm(closeCallback, renderLoading, validationConfig) {

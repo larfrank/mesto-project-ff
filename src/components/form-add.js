@@ -18,30 +18,23 @@ export function initAddForm() {
 function handleFormSubmit(evt) {
   evt.preventDefault();
 
-  renderLoadFn(evt.submitter, true);
+  renderLoadFn(evt.target.querySelector('.popup__loading'), true);
 
   getNewCard(inputPlaceName.value, inputLink.value)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
     .then((res) => {
       const userId = res.owner._id;
       const newCard = createCard(res, deleteCallback, likeCallback, openImgFn, userId);
       cardContainer.prepend(newCard);
       closeAddFn(formElementAdd.closest('.popup_type_new-card'));
-      clearValidation(formElementAdd, valConfig);
+      evt.target.reset();
     })
     .catch((err) => {
       console.log(err); 
     })
     .finally(() => {
+      clearValidation(formElementAdd, valConfig);
       renderLoadFn(evt.target.querySelector('.popup__loading'), false);
     })
-
-  evt.target.reset();
 };
 
 export function initSubmitAddForm(closeCallback, openImgCallback, renderLoading, validationConfig) {

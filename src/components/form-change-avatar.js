@@ -19,14 +19,9 @@ function handleFormSubmit(evt) {
 
   changePhoto(avatarLink.style.backgroundImage.slice(5,-2))
     .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-      return Promise.reject(res.status);
-    })
-    .then((res) => {
       console.log(res);
       avatarLink.style.backgroundImage = `url('${inputLink.value}')`;
+      closeChAvFn(formElementChAv.closest('.popup_type_new-avatar'));
     })
     .catch((err) => {
       console.log(err); 
@@ -34,8 +29,6 @@ function handleFormSubmit(evt) {
     .finally(() => {
       renderLoadFn(evt.target.querySelector('.popup__loading'), false);
     })
-
-  closeChAvFn(formElementChAv.closest('.popup_type_new-avatar'));
 }
 
 export function initSubmitChangeAvatarForm(closeCallback, renderLoading, validationConfig) {

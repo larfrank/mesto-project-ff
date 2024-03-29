@@ -1,10 +1,16 @@
-
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/wff-cohort-9',
   headers: {
     authorization: 'a6a6e99e-c7c9-48b8-9e1a-351bb821e87a',
     'Content-Type': 'application/json'
   }
+}
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(res.status);
 }
 
 export const getInitialCards = () => {
@@ -27,7 +33,7 @@ export const changeInfo = (profileName, profileAbout) => {
      name: profileName,
      about: profileAbout,
     })
-  });
+  }).then(checkResponse)
 }
 
 export const getNewCard = (cardName, cardLink) => {
@@ -38,28 +44,28 @@ export const getNewCard = (cardName, cardLink) => {
       name: cardName,
       link: cardLink
     })
-  });
+  }).then(checkResponse)
 }
 
 export const deleteCard = (cardId) => {
   return fetch((`${config.baseUrl}/cards/${cardId}`), {
     method: 'DELETE',
     headers: config.headers
-  })
+  }).then(checkResponse)
 }
 
 export const addLike = (cardId) => {
   return fetch((`${config.baseUrl}/cards/likes/${cardId}`), {
     method: 'PUT',
     headers: config.headers
-  })
+  }).then(checkResponse)
 }
 
 export const deleteLike = (cardId) => {
   return fetch((`${config.baseUrl}/cards/likes/${cardId}`), {
     method: 'DELETE',
     headers: config.headers
-  })
+  }).then(checkResponse)
 }
 
 export const changePhoto = (avatarsLink) => {
@@ -69,6 +75,6 @@ export const changePhoto = (avatarsLink) => {
     body: JSON.stringify({
       avatar: avatarsLink
     })
-  })
+  }).then(checkResponse)
 }
 
