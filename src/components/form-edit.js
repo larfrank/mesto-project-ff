@@ -22,7 +22,7 @@ function handleFormSubmit(evt) {
 
   renderLoadFn(evt.target.querySelector('.popup__loading'), true);
 
-  changeInfo(profileTitle.textContent, profileDesc.textContent)
+  changeInfo(inputName.value, inputDesc.value)
     .then((res) => {
       console.log(res);
       profileTitle.textContent = inputName.value;

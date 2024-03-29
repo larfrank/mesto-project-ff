@@ -17,7 +17,7 @@ function handleFormSubmit(evt) {
   
   renderLoadFn(evt.target.querySelector('.popup__loading'), true);
 
-  changePhoto(avatarLink.style.backgroundImage.slice(5,-2))
+  changePhoto(inputLink.value)
     .then((res) => {
       console.log(res);
       avatarLink.style.backgroundImage = `url('${inputLink.value}')`;
