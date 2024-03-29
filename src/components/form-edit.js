@@ -19,11 +19,8 @@ export function initProfileForm() {
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
-    
-  profileTitle.textContent = inputName.value;
-  profileDesc.textContent = inputDesc.value;
 
-  renderLoadFn(evt.target.querySelector('.popup__loading'), true);
+  renderLoadFn(evt.submitter, true);
 
   changeInfo(profileTitle.textContent, profileDesc.textContent)
     .then((res) => {
@@ -33,7 +30,9 @@ function handleFormSubmit(evt) {
       return Promise.reject(res.status);
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
+      profileTitle.textContent = inputName.value;
+      profileDesc.textContent = inputDesc.value;
     })
     .catch((err) => {т
       console.log(err); 

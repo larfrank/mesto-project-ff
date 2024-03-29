@@ -14,8 +14,6 @@ export function initChangeAvatarForm() {
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
-
-  avatarLink.style.backgroundImage = `url('${inputLink.value}')`;
   
   renderLoadFn(evt.target.querySelector('.popup__loading'), true);
 
@@ -27,7 +25,8 @@ function handleFormSubmit(evt) {
       return Promise.reject(res.status);
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
+      avatarLink.style.backgroundImage = `url('${inputLink.value}')`;
     })
     .catch((err) => {
       console.log(err); 

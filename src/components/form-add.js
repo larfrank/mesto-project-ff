@@ -18,7 +18,7 @@ export function initAddForm() {
 function handleFormSubmit(evt) {
   evt.preventDefault();
 
-  renderLoadFn(evt.target.querySelector('.popup__loading'), true);
+  renderLoadFn(evt.submitter, true);
 
   getNewCard(inputPlaceName.value, inputLink.value)
     .then((res) => {
@@ -31,6 +31,8 @@ function handleFormSubmit(evt) {
       const userId = res.owner._id;
       const newCard = createCard(res, deleteCallback, likeCallback, openImgFn, userId);
       cardContainer.prepend(newCard);
+      closeAddFn(formElementAdd.closest('.popup_type_new-card'));
+      clearValidation(formElementAdd, valConfig);
     })
     .catch((err) => {
       console.log(err); 
@@ -38,10 +40,6 @@ function handleFormSubmit(evt) {
     .finally(() => {
       renderLoadFn(evt.target.querySelector('.popup__loading'), false);
     })
-
-  clearValidation(formElementAdd, valConfig);
-
-  closeAddFn(formElementAdd.closest('.popup_type_new-card'));
 
   evt.target.reset();
 };
